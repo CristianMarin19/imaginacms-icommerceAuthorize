@@ -19,7 +19,7 @@
 
     <div class="row my-5 justify-content-center">
 
-        @include('icommerceauthorize::frontend.partials.modal')
+       @include('icommerceauthorize::frontend.partials.modal')
 
     </div>
 
