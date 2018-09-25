@@ -5,7 +5,7 @@ use Illuminate\Routing\Router;
 
 $router->group(['prefix' =>'/icommerceauthorize'], function (Router $router) {
     $router->bind('authorizeconfig', function ($id) {
-        return app('Modules\IcommerceAuthorize\Repositories\AuthorizeconfigRepository')->find($id);
+        return app('Modules\Icommerceauthorize\Repositories\AuthorizeconfigRepository')->find($id);
     });
     $router->get('authorizeconfigs', [
         'as' => 'admin.icommerceauthorize.authorizeconfig.index',

@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\IcommerceAuthorize\Http\Controllers\Admin;
+namespace Modules\Icommerceauthorize\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\IcommerceAuthorize\Entities\Authorizeconfig;
-use Modules\IcommerceAuthorize\Http\Requests\CreateAuthorizeconfigRequest;
-use Modules\IcommerceAuthorize\Http\Requests\UpdateAuthorizeconfigRequest;
-use Modules\IcommerceAuthorize\Repositories\AuthorizeconfigRepository;
+use Modules\Icommerceauthorize\Entities\Authorizeconfig;
+use Modules\Icommerceauthorize\Http\Requests\CreateAuthorizeconfigRequest;
+use Modules\Icommerceauthorize\Http\Requests\UpdateAuthorizeconfigRequest;
+use Modules\Icommerceauthorize\Repositories\AuthorizeconfigRepository;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Setting\Repositories\SettingRepository;
 

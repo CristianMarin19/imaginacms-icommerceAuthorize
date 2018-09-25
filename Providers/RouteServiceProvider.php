@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\IcommerceAuthorize\Providers;
+namespace Modules\Icommerceauthorize\Providers;
 
 use Modules\Core\Providers\RoutingServiceProvider as CoreRoutingServiceProvider;
 
@@ -10,7 +10,7 @@ class RouteServiceProvider extends CoreRoutingServiceProvider
      * The root namespace to assume when generating URLs to actions.
      * @var string
      */
-    protected $namespace = 'Modules\IcommerceAuthorize\Http\Controllers';
+    protected $namespace = 'Modules\Icommerceauthorize\Http\Controllers';
 
     /**
      * @return string

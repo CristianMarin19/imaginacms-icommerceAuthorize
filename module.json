@@ -7,8 +7,8 @@
     "active": 1,
     "order": 1,
     "providers": [
-        "Modules\\IcommerceAuthorize\\Providers\\IcommerceAuthorizeServiceProvider",
-        "Modules\\IcommerceAuthorize\\Providers\\RouteServiceProvider"
+        "Modules\\Icommerceauthorize\\Providers\\IcommerceAuthorizeServiceProvider",
+        "Modules\\Icommerceauthorize\\Providers\\RouteServiceProvider"
     ],
     "aliases": {},
     "files": [

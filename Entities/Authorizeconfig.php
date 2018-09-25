@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\IcommerceAuthorize\Entities;
+namespace Modules\Icommerceauthorize\Entities;
 
 class Authorizeconfig
 {
@@ -16,13 +16,13 @@ class Authorizeconfig
     public function __construct()
     {
 
-        $this->description = setting('icommerceAuthorize::description');
-        $this->api_login = setting('icommerceAuthorize::api_login');
-        $this->transaction_key = setting('icommerceAuthorize::transaction_key');
-        $this->client_key = setting('icommerceAuthorize::client_key');
-        $this->url_action = setting('icommerceAuthorize::url_action');
-    	$this->image = setting('icommerceAuthorize::image');
-        $this->status = setting('icommerceAuthorize::status');
+        $this->description = setting('icommerceauthorize::description');
+        $this->api_login = setting('icommerceauthorize::api_login');
+        $this->transaction_key = setting('icommerceauthorize::transaction_key');
+        $this->client_key = setting('icommerceauthorize::client_key');
+        $this->url_action = setting('icommerceauthorize::url_action');
+    	$this->image = setting('icommerceauthorize::image');
+        $this->status = setting('icommerceauthorize::status');
 
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\IcommerceAuthorize\Http\Controllers;
+namespace Modules\Icommerceauthorize\Http\Controllers;
 
 use Mockery\CountValidator\Exception;
 
@@ -19,7 +19,7 @@ use Modules\Setting\Contracts\Setting;
 use Illuminate\Http\Request as Requests;
 use Illuminate\Support\Facades\Log;
 
-use Modules\IcommerceAuthorize\Entities\Authorizeconfig;
+use Modules\Icommerceauthorize\Entities\Authorizeconfig;
 
 use net\authorize\api\contract\v1 as AnetAPI;
 use net\authorize\api\controller as AnetController;

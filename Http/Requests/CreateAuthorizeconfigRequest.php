@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\IcommerceAuthorize\Http\Requests;
+namespace Modules\Icommerceauthorize\Http\Requests;
 
 use Modules\Core\Internationalisation\BaseFormRequest;
 

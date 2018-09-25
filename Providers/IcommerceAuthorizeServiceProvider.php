@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\IcommerceAuthorize\Providers;
+namespace Modules\Icommerceauthorize\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Core\Traits\CanPublishConfiguration;
 use Modules\Core\Events\BuildingSidebar;
 use Modules\Core\Events\LoadingBackendTranslations;
-use Modules\IcommerceAuthorize\Events\Handlers\RegisterIcommerceAuthorizeSidebar;
+use Modules\Icommerceauthorize\Events\Handlers\RegisterIcommerceAuthorizeSidebar;
 
 class IcommerceAuthorizeServiceProvider extends ServiceProvider
 {
@@ -37,7 +37,7 @@ class IcommerceAuthorizeServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->publishConfig('icommerceAuthorize', 'permissions');
+        $this->publishConfig('icommerceauthorize', 'permissions');
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
@@ -55,15 +55,15 @@ class IcommerceAuthorizeServiceProvider extends ServiceProvider
     private function registerBindings()
     {
         $this->app->bind(
-            'Modules\IcommerceAuthorize\Repositories\AuthorizeconfigRepository',
+            'Modules\Icommerceauthorize\Repositories\AuthorizeconfigRepository',
             function () {
-                $repository = new \Modules\IcommerceAuthorize\Repositories\Eloquent\EloquentAuthorizeconfigRepository(new \Modules\IcommerceAuthorize\Entities\Authorizeconfig());
+                $repository = new \Modules\Icommerceauthorize\Repositories\Eloquent\EloquentAuthorizeconfigRepository(new \Modules\Icommerceauthorize\Entities\Authorizeconfig());
 
                 if (! config('app.cache')) {
                     return $repository;
                 }
 
-                return new \Modules\IcommerceAuthorize\Repositories\Cache\CacheAuthorizeconfigDecorator($repository);
+                return new \Modules\Icommerceauthorize\Repositories\Cache\CacheAuthorizeconfigDecorator($repository);
             }
         );
 // add bindings

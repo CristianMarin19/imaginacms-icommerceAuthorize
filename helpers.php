@@ -1,7 +1,7 @@
 <?php
 
 
-use Modules\IcommerceAuthorize\Entities\Authorizeconfig;
+use Modules\Icommerceauthorize\Entities\Authorizeconfig;
 
 
 if (! function_exists('icommerceauthorize_get_configuration')) {

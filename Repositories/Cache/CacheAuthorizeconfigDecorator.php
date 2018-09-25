@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\IcommerceAuthorize\Repositories\Cache;
+namespace Modules\Icommerceauthorize\Repositories\Cache;
 
-use Modules\IcommerceAuthorize\Repositories\AuthorizeconfigRepository;
+use Modules\Icommerceauthorize\Repositories\AuthorizeconfigRepository;
 use Modules\Core\Repositories\Cache\BaseCacheDecorator;
 
 class CacheAuthorizeconfigDecorator extends BaseCacheDecorator implements AuthorizeconfigRepository

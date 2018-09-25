@@ -15,7 +15,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Modules\\IcommerceAuthorize\\": ".",
+            "Modules\\Icommerceauthorize\\": ".",
             "Modules\\": "Modules/"
         }
     },
@@ -30,7 +30,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\IcommerceAuthorize\\Providers\\IcommerceAuthorizeServiceProvider"
+                "Modules\\Icommerceauthorize\\Providers\\IcommerceAuthorizeServiceProvider"
             ],
             "aliases": {
                 
@@ -39,7 +39,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\IcommerceAuthorize\\": ""
+            "Modules\\Icommerceauthorize\\": ""
         }
     }
 }
