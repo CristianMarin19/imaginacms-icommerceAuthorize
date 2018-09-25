@@ -1,0 +1,6 @@
+url: https://github.com/imagina/asgardcms-icommerce
+versions:
+    "0.1.0":
+        added:
+            - initial commit
+            - fixeds, new function, add readme, translates, other changes
