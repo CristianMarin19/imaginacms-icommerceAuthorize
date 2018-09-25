@@ -1,5 +1,8 @@
 url: https://github.com/imagina/asgardcms-icommerce
 versions:
+    "0.1.1":
+        change:
+            - Namespace to IcommerceAuthorize
     "0.1.0":
         added:
             - initial commit
