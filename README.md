@@ -27,6 +27,6 @@
 
 ### Init (Parameters = orderID)
     
-    https://icommerce.imagina.com.co/api/icommerceauthorize/
+    https://mydomain/api/icommerceauthorize/
 
 	
