@@ -27,7 +27,7 @@ class RegisterIcommerceauthorizeSidebar implements \Maatwebsite\Sidebar\SidebarE
 
     public function handle(BuildingSidebar $sidebar)
     {
-        $sidebar->add($this->extendWith($sidebar->getMenu()));
+        //$sidebar->add($this->extendWith($sidebar->getMenu()));
     }
 
     /**

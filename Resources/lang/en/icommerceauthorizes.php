@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'single' => 'Authorize',
+    'description' => 'The description module',
     'list resource' => 'List icommerceauthorizes',
     'create resource' => 'Create icommerceauthorizes',
     'edit resource' => 'Edit icommerceauthorizes',
@@ -14,6 +16,10 @@ return [
         'create icommerceauthorize' => 'Create a icommerceauthorize',
     ],
     'table' => [
+        'api_login' => 'Api Login',
+        'transaction_key' => 'Transaction Key',
+        'client_key' => 'Client Key',
+        'mode' => 'Mode'
     ],
     'form' => [
     ],

@@ -38,6 +38,7 @@ class IcommerceauthorizeServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishConfig('icommerceauthorize', 'permissions');
+        $this->publishConfig('icommerceauthorize', 'config');
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }

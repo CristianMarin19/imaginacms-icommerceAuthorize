@@ -1,18 +1,32 @@
 # asgardcms-icommerceauthorize
 
-### Vendors
+## Seeder
 
-"require": {
-    "authorizenet/authorizenet": "~1.9.7"
-},
+    run php artisan module:seed Icommerceauthorize
 
-### Data Configuration
+## Vendors
 
-You must generate: Api Login, Transaction Key and Public Key Client
-   
+     add composer.json 
 
-    - Mode Sandbox: https://sandbox.authorize.net/
+        "require": {
+            "authorizenet/authorizenet":"~1.9.7"
+        },
 
-    - Mode Production: https://account.authorize.net/
+## Configurations
+
+    You must generate: 
+        - Api Login
+        - Transaction Key
+        - Public Key Client
+    
+    Links Accounts:
+        - Mode Sandbox: https://sandbox.authorize.net/
+        - Mode Production: https://account.authorize.net/
+
+## API
+
+### Init (Parameters = orderID)
+    
+    https://icommerce.imagina.com.co/api/icommerceauthorize/
 
 	

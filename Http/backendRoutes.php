@@ -27,7 +27,7 @@ $router->group(['prefix' =>'/icommerceauthorize'], function (Router $router) {
         'uses' => 'IcommerceAuthorizeController@edit',
         'middleware' => 'can:icommerceauthorize.icommerceauthorizes.edit'
     ]);
-    $router->put('icommerceauthorizes/{icommerceauthorize}', [
+    $router->put('icommerceauthorizes/{id}', [
         'as' => 'admin.icommerceauthorize.icommerceauthorize.update',
         'uses' => 'IcommerceAuthorizeController@update',
         'middleware' => 'can:icommerceauthorize.icommerceauthorizes.edit'

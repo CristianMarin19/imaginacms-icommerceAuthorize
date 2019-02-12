@@ -9,6 +9,7 @@ use Modules\Icommerceauthorize\Http\Requests\CreateIcommerceAuthorizeRequest;
 use Modules\Icommerceauthorize\Http\Requests\UpdateIcommerceAuthorizeRequest;
 use Modules\Icommerceauthorize\Repositories\IcommerceAuthorizeRepository;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
+use Modules\Icommerce\Repositories\PaymentMethodRepository;
 
 class IcommerceAuthorizeController extends AdminBaseController
 {
@@ -16,12 +17,15 @@ class IcommerceAuthorizeController extends AdminBaseController
      * @var IcommerceAuthorizeRepository
      */
     private $icommerceauthorize;
+    private $paymentMethod;
 
-    public function __construct(IcommerceAuthorizeRepository $icommerceauthorize)
-    {
+    public function __construct(
+        IcommerceAuthorizeRepository $icommerceauthorize,
+        PaymentMethodRepository $paymentMethod
+    ){
         parent::__construct();
-
         $this->icommerceauthorize = $icommerceauthorize;
+        $this->paymentMethod = $paymentMethod;
     }
 
     /**
@@ -78,12 +82,24 @@ class IcommerceAuthorizeController extends AdminBaseController
      * @param  UpdateIcommerceAuthorizeRequest $request
      * @return Response
      */
-    public function update(IcommerceAuthorize $icommerceauthorize, UpdateIcommerceAuthorizeRequest $request)
+    public function update($id, UpdateIcommerceAuthorizeRequest $request)
     {
-        $this->icommerceauthorize->update($icommerceauthorize, $request->all());
+       
+        //Find payment Method
+        $paymentMethod = $this->paymentMethod->find($id);
+        
+        //Add status request
+        if($request->status=='on')
+            $request['status'] = "1";
+        else
+            $request['status'] = "0";
 
-        return redirect()->route('admin.icommerceauthorize.icommerceauthorize.index')
-            ->withSuccess(trans('core::core.messages.resource updated', ['name' => trans('icommerceauthorize::icommerceauthorizes.title.icommerceauthorizes')]));
+        $this->icommerceauthorize->update($paymentMethod,$request->all());
+
+        return redirect()->route('admin.icommerce.paymentmethod.index')
+            ->withSuccess(trans('core::core.messages.resource updated', ['name' => trans('icommerceauthorize::icommerceauthorizes.single')]));
+
+
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
 return [
-    'name' => 'Icommerceauthorize'
+    'name' => 'Icommerceauthorize',
+    'paymentName' => 'icommerceauthorize'
+
 ];
