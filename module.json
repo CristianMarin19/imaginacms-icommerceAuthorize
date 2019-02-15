@@ -1,7 +1,7 @@
 {
     "name": "Icommerceauthorize",
     "alias": "icommerceauthorize",
-    "description": "",
+    "description": "Authorize - PaymentMethod Module to Icommerce",
     "keywords": [],
     "version": "1.0.0",
 	"active": 1,

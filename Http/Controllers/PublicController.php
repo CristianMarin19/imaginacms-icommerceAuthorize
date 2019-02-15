@@ -214,8 +214,10 @@ class PublicController extends BasePublicController
  
  
          }catch(Exception $e){
-             Log::info('Authorize Error:  Exception'.time());
-              //echo $e->getMessage();
+
+            \Log::error('Module Icommerceauthorize-Send: Message: '.$e->getMessage());
+            \Log::error('Module Icommerceauthorize-Send: Code: '.$e->getCode());
+
          }
        
     }

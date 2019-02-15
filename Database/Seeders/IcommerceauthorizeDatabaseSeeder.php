@@ -17,6 +17,7 @@ class IcommerceauthorizeDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        $options['init'] = "Modules\Icommerceauthorize\Http\Controllers\Api\IcommerceAuthorizeApiController";
         $options['mainimage'] = null;
         $options['api_login'] = "";
         $options['transaction_key'] = "";

@@ -98,7 +98,8 @@ class IcommerceAuthorizeApiController extends BaseApiController
 
             // Response
             $response = [ 'data' => [
-                "redirectRoute" => $redirectRoute
+                "redirectRoute" => $redirectRoute,
+                "external" => true
             ]];
 
 
