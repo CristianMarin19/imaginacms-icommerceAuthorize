@@ -80,6 +80,7 @@ class IcommerceAuthorizeApiController extends BaseApiController
             $currency = $this->currency->getActive();
 
             // Create Transaction
+            
             $transaction = $this->validateResponseApi(
                 $this->transactionController->create(new Request([
                     'order_id' => $order->id,
@@ -88,13 +89,11 @@ class IcommerceAuthorizeApiController extends BaseApiController
                     'status' => $statusOrder
                 ]))
             );
-
-            // Encri Base 64
-            $eOrderID = base64_encode($order->id);
-            $eTransactionID = base64_encode($transaction->id);
-            $eCurrencyID = base64_encode($currency->id);
-
-            $redirectRoute = route('icommerceauthorize',[$eOrderID,$eTransactionID,$eCurrencyID]);
+            
+            // Encri
+            $eUrl = $this->icommerceauthorize->encriptUrl($order->id,$transaction->id,$currency->id);
+           
+            $redirectRoute = route('icommerceauthorize',[$eUrl]);
 
             // Response
             $response = [ 'data' => [

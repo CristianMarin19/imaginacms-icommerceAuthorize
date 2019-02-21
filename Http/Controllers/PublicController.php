@@ -13,6 +13,7 @@ use Modules\Core\Http\Controllers\BasePublicController;
 use Modules\Icommerceauthorize\Http\Controllers\Api\IcommerceAuthorizeApiController;
 
 // Repositories
+use Modules\Icommerceauthorize\Repositories\IcommerceAuthorizeRepository;
 use Modules\Icommerce\Repositories\PaymentMethodRepository;
 use Modules\Icommerce\Repositories\TransactionRepository;
 use Modules\Icommerce\Repositories\OrderRepository;
@@ -23,7 +24,8 @@ use net\authorize\api\controller as AnetController;
 
 class PublicController extends BasePublicController
 {
-  
+    
+    private $icommerceauthorize;
     private $paymentMethod;
     private $order;
     private $transaction;
@@ -34,6 +36,7 @@ class PublicController extends BasePublicController
     protected $urlProduction;
 
     public function __construct(
+        IcommerceAuthorizeRepository $icommerceauthorize,
         PaymentMethodRepository $paymentMethod,
         OrderRepository $order,
         TransactionRepository $transaction,
@@ -41,6 +44,7 @@ class PublicController extends BasePublicController
         IcommerceAuthorizeApiController $authorizeApiController
     )
     {
+        $this->icommerceauthorize = $icommerceauthorize;
         $this->paymentMethod = $paymentMethod;
         $this->order = $order;
         $this->transaction = $transaction;
@@ -57,14 +61,15 @@ class PublicController extends BasePublicController
      * @param Requests request
      * @return route
      */
-    public function index($eorderID,$etransactionID,$ecurrencyID){
+    public function index($eURL){
 
         try {
 
-            // Decr Base 64
-            $orderID = base64_decode($eorderID);
-            $transactionID = base64_decode($etransactionID);
-            $currencyID = base64_decode($ecurrencyID);
+            // Decr
+            $infor = $this->icommerceauthorize->decriptUrl($eURL);
+            $orderID = $infor[0];
+            $transactionID = $infor[1];
+            $currencyID = $infor[2];
 
             \Log::info('Module Icommerceauthorize: Index-ID:'.$orderID);
             
