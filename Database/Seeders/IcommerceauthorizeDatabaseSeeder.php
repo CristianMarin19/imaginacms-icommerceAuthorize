@@ -24,6 +24,9 @@ class IcommerceauthorizeDatabaseSeeder extends Seeder
         $options['client_key'] = "";
         $options['mode'] = "sandbox";
 
+        $titleTrans = 'icommerceauthorize::icommerceauthorizes.single';
+        $descriptionTrans = 'icommerceauthorize::icommerceauthorizes.description';
+
         foreach (['en', 'es'] as $locale) {
             if($locale=='en'){
                 $params = array(
