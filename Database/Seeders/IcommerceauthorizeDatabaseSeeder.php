@@ -23,16 +23,26 @@ class IcommerceauthorizeDatabaseSeeder extends Seeder
         $options['transaction_key'] = "";
         $options['client_key'] = "";
         $options['mode'] = "sandbox";
-       
-        
-        $params = array(
-            'title' => trans('icommerceauthorize::icommerceauthorizes.single'),
-            'description' => trans('icommerceauthorize::icommerceauthorizes.description'),
-            'name' => config('asgard.icommerceauthorize.config.paymentName'),
-            'status' => 0,
-            'options' => $options
-        );
 
-        PaymentMethod::create($params);
+        foreach (['en', 'es'] as $locale) {
+            if($locale=='en'){
+                $params = array(
+                    'title' => trans($titleTrans),
+                    'description' => trans($descriptionTrans),
+                    'name' => config('asgard.icommerceauthorize.config.paymentName'),
+                    'status' => 0,
+                    'options' => $options
+                );
+                $paymentMethod = PaymentMethod::create($params);
+                
+            }else{
+                $title = trans($titleTrans,[],$locale);
+                $description = trans($descriptionTrans,[],$locale);
+                $paymentMethod->translateOrNew($locale)->title = $title;
+                $paymentMethod->translateOrNew($locale)->description = $description;
+                $paymentMethod->save();
+            }
+        }// Foreach
+
     }
 }
