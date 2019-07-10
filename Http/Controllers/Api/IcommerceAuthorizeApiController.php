@@ -80,14 +80,13 @@ class IcommerceAuthorizeApiController extends BaseApiController
             $currency = $this->currency->getActive();
 
             // Create Transaction
-            
             $transaction = $this->validateResponseApi(
-                $this->transactionController->create(new Request([
+                $this->transactionController->create(new Request(["attributes" => [
                     'order_id' => $order->id,
                     'payment_method_id' => $paymentMethod->id,
                     'amount' => $order->total,
                     'status' => $statusOrder
-                ]))
+                ]]))
             );
             
             // Encri
@@ -181,29 +180,46 @@ class IcommerceAuthorizeApiController extends BaseApiController
            
             // Update Transaction
             $transaction = $this->validateResponseApi(
-                $this->transactionController->update($transactionID,new Request([
-                    'order_id' => $order->id,
-                    'payment_method_id' => $paymentMethodID,
-                    'amount' => $order->total,
-                    'status' => $newstatusOrder,
-                    'external_status' => $external_status
+                $this->transactionController->update($transactionID,new Request(
+                    ["attributes" => [
+                        'order_id' => $order->id,
+                        'payment_method_id' => $paymentMethod->id,
+                        'amount' => $order->total,
+                        'status' => $newstatusOrder,
+                        'external_status' => $external_status
+                    ]
                 ]))
             );
             
-
             // Update Order Process 
             $orderUP = $this->validateResponseApi(
-                $this->orderController->update($order->id,new Request([
-                    'order_id' => $order->id,
-                    'status_id' => $newstatusOrder,
+                $this->orderController->update($order->id,new Request(
+                    ["attributes" => [
+                        'order_id' => $order->id,
+                        'status_id' => $newstatusOrder,
+                    ]
                 ]))
             );
+
+            // Check quasar app
+            $isQuasarAPP = env("QUASAR_APP", false);
+
+            if(!$isQuasarAPP){
+
+                if (!empty($order))
+                  return redirect()->route('icommerce.order.showorder', [$order->id, $order->key]);
+                else
+                  return redirect()->route('homepage');
+                
+            }else{
+                return view('icommerce::frontend.orders.closeWindow');
+            }
 
              // Check order
             //if (!empty($order))
                 //$redirectRoute = route('icommerce.order.showorder', [$order->id, $order->key]);
             //else
-                $redirectRoute = route('homepage');
+                //$redirectRoute = route('homepage');
 
              // Response
             $response = [ 'data' => [
@@ -222,19 +238,24 @@ class IcommerceAuthorizeApiController extends BaseApiController
 
                 // Update Transaction
                 $transactionUP = $this->validateResponseApi(
-                    $this->transactionController->update($transactionID,new Request([
-                        'status' => $newstatusOrder,
-                        'external_status' => "canceled",
-                        'external_code' => $e->getCode()
+                    $this->transactionController->update($transaction->id,new Request(
+                        ["attributes" => [
+                            'status' => $newstatusOrder,
+                            'external_status' => "canceled",
+                            'external_code' => $e->getCode()
+                        ]
                     ]))
                 );
 
                 // Update Order Process 
                 $orderUP = $this->validateResponseApi(
-                    $this->orderController->update($orderID,new Request([
-                        'status_id' => $newstatusOrder,
+                    $this->orderController->update($orderID,new Request(
+                        ["attributes" => [
+                            'status_id' => $newstatusOrder,
+                        ]
                     ]))
                 );
+
             }
 
             //Message Error
