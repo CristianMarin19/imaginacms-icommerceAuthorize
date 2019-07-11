@@ -90,8 +90,8 @@ class PublicController extends BasePublicController
             else
                 $acceptJS = $this->urlProduction;
 
-            $apiLogin = $paymentMethod->options->api_login;
-            $clientKey = $paymentMethod->options->client_key;
+            $apiLogin = $paymentMethod->options->apilogin;
+            $clientKey = $paymentMethod->options->clientkey;
 
             $tpl = 'icommerceauthorize::frontend.index';
 
@@ -138,8 +138,8 @@ class PublicController extends BasePublicController
  
              $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
  
-             $merchantAuthentication->setName($paymentMethod->options->api_login);
-             $merchantAuthentication->setTransactionKey($paymentMethod->options->transaction_key);
+             $merchantAuthentication->setName($paymentMethod->options->apilogin);
+             $merchantAuthentication->setTransactionKey($paymentMethod->options->transactionkey);
  
              // Set the transaction's refId
              $refId = $order->id."-".$transaction->id;

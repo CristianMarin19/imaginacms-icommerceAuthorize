@@ -1,5 +1,10 @@
 url: https://github.com/imagina/asgardcms-icommerceauthorize
 versions:
+  "1.0.2":
+    Changed:
+    - Updated Seeder
+    - Changes variables Init
+    - Other fixes
   "1.0.1":
     Changed:
       - Add 'attributes' to order and transaction

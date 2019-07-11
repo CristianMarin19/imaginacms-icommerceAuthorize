@@ -183,7 +183,7 @@ class IcommerceAuthorizeApiController extends BaseApiController
                 $this->transactionController->update($transactionID,new Request(
                     ["attributes" => [
                         'order_id' => $order->id,
-                        'payment_method_id' => $paymentMethod->id,
+                        'payment_method_id' => $paymentMethodID,
                         'amount' => $order->total,
                         'status' => $newstatusOrder,
                         'external_status' => $external_status
@@ -228,9 +228,11 @@ class IcommerceAuthorizeApiController extends BaseApiController
           
         } catch (\Exception $e) {
              
+            \Log::info('Module Icommerceauthorize: Exception - AuthorizeApiController');
+
             $orderID = $request->orderID;
             $transactionID = $request->transactionID;
-            $paymentMethodID = $request->paymentMethodID;
+            //$paymentMethodID = $request->paymentMethodID;
 
             if(!empty($transactionID)){
 
@@ -238,7 +240,7 @@ class IcommerceAuthorizeApiController extends BaseApiController
 
                 // Update Transaction
                 $transactionUP = $this->validateResponseApi(
-                    $this->transactionController->update($transaction->id,new Request(
+                    $this->transactionController->update($transactionID,new Request(
                         ["attributes" => [
                             'status' => $newstatusOrder,
                             'external_status' => "canceled",

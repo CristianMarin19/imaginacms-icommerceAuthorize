@@ -19,9 +19,9 @@ class IcommerceauthorizeDatabaseSeeder extends Seeder
 
         $options['init'] = "Modules\Icommerceauthorize\Http\Controllers\Api\IcommerceAuthorizeApiController";
         $options['mainimage'] = null;
-        $options['api_login'] = "";
-        $options['transaction_key'] = "";
-        $options['client_key'] = "";
+        $options['apilogin'] = "";
+        $options['transactionkey'] = "";
+        $options['clientkey'] = "";
         $options['mode'] = "sandbox";
 
         $titleTrans = 'icommerceauthorize::icommerceauthorizes.single';

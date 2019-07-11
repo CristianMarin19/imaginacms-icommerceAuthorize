@@ -32,17 +32,17 @@
         
         <div class="form-group ">
             <label for="api_login">{{trans('icommerceauthorize::icommerceauthorizes.table.api_login')}}</label>
-            <input placeholder="{{trans('icommerceauthorize::icommerceauthorizes.table.api_login')}}" required="required" name="api_login" type="text" id="api_login" class="form-control" value="{{$method->options->api_login}}">
+            <input placeholder="{{trans('icommerceauthorize::icommerceauthorizes.table.api_login')}}" required="required" name="api_login" type="text" id="api_login" class="form-control" value="{{$method->options->apilogin}}">
         </div>
 
         <div class="form-group ">
             <label for="transaction_key">{{trans('icommerceauthorize::icommerceauthorizes.table.transaction_key')}}</label>
-            <input placeholder="{{trans('icommerceauthorize::icommerceauthorizes.table.transaction_key')}}" required="required" name="transaction_key" type="text" id="transaction_key" class="form-control" value="{{$method->options->transaction_key}}">
+            <input placeholder="{{trans('icommerceauthorize::icommerceauthorizes.table.transaction_key')}}" required="required" name="transaction_key" type="text" id="transaction_key" class="form-control" value="{{$method->options->transactionkey}}">
         </div>
 
         <div class="form-group ">
             <label for="client_key">{{trans('icommerceauthorize::icommerceauthorizes.table.client_key')}}</label>
-            <input placeholder="{{trans('icommerceauthorize::icommerceauthorizes.table.client_key')}}" required="required" name="client_key" type="text" id="client_key" class="form-control" value="{{$method->options->client_key}}">
+            <input placeholder="{{trans('icommerceauthorize::icommerceauthorizes.table.client_key')}}" required="required" name="client_key" type="text" id="client_key" class="form-control" value="{{$method->options->clientkey}}">
         </div>
 
         <div class="form-group">
