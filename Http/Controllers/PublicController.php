@@ -113,7 +113,7 @@ class PublicController extends BasePublicController
      * @param Requests request
      * @return redirect
      */
-    public function send($orderID,$transactionID,$oval,$odes,Request $request2){
+    public function processPayment($orderID,$transactionID,$oval,$odes){
         
         $order = $this->order->find($orderID);
         $transaction = $this->transaction->find($transactionID);
