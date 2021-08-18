@@ -48,8 +48,8 @@ class PublicController extends BasePublicController
         $this->transaction = $transaction;
         $this->authorizeApiController = $authorizeApiController;
 
-        $this->urlSandbox = "https://jstest.authorize.net/v3/AcceptUI.js";
-        $this->urlProduction = "https://js.authorize.net/v3/AcceptUI.js";
+        $this->urlSandbox = config('asgard.icommerceauthorize.config.apiUrl.sandbox');
+        $this->urlProduction = config('asgard.icommerceauthorize.config.apiUrl.production');
     }
 
 
@@ -195,8 +195,7 @@ class PublicController extends BasePublicController
              else
                  $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
              
-            //dd($response);
-             
+            
             return $this->authorizeApiController->response(new Request([
                     'response' => $response,
                     'orderID' => $order->id,

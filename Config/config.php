@@ -2,6 +2,14 @@
 
 return [
     'name' => 'Icommerceauthorize',
-    'paymentName' => 'icommerceauthorize'
+    'paymentName' => 'icommerceauthorize',
+
+    /*
+    * API URL
+    */
+    'apiUrl' => [
+        'sandbox' => 'https://jstest.authorize.net/v3/AcceptUI.js',
+        'production' => 'https://js.authorize.net/v3/AcceptUI.js'
+    ],
 
 ];
