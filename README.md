@@ -1,16 +1,23 @@
-# asgardcms-icommerceauthorize
+# imaginacms-icommerceauthorize (PaymentMethod)
 
+## Install
+```bash
+composer require imagina/icommerceauthorize-module=v8.x-dev
+```
+
+```bash
+composer require authorizenet/authorizenet
+```
+
+## Enable the module
+```bash
+php artisan module:enable Icommerceauthorize
+```
 ## Seeder
 
-    run php artisan module:seed Icommerceauthorize
-
-## Vendors
-
-     add composer.json 
-
-        "require": {
-            "authorizenet/authorizenet":"~1.9.7"
-        },
+```bash
+php artisan module:seed Icommerceauthorize
+```
 
 ## Configurations
 
@@ -22,11 +29,3 @@
     Links Accounts:
         - Mode Sandbox: https://sandbox.authorize.net/
         - Mode Production: https://account.authorize.net/
-
-## API
-
-### Init (Parameters = orderID)
-    
-    https://mydomain/api/icommerceauthorize/
-
-	

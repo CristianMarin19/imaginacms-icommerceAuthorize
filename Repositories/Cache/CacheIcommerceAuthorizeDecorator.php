@@ -14,19 +14,7 @@ class CacheIcommerceAuthorizeDecorator extends BaseCacheDecorator implements Ico
         $this->repository = $icommerceauthorize;
     }
 
-     /**
-     * List or resources
-     *
-     * @return mixed
-     */
-    public function encriptUrl($parameters,$conf)
-    {
-        return $this->remember(function () use ($orderID,$transactionID,$currencyID) {
-            return $this->repository->encriptUrl($orderID,$transactionID,$currencyID);
-        });
-    }
-
-
+    
      /**
      * List or resources
      *

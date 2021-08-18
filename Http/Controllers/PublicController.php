@@ -17,7 +17,7 @@ use Modules\Icommerceauthorize\Repositories\IcommerceAuthorizeRepository;
 use Modules\Icommerce\Repositories\PaymentMethodRepository;
 use Modules\Icommerce\Repositories\TransactionRepository;
 use Modules\Icommerce\Repositories\OrderRepository;
-use Modules\Icommerce\Repositories\CurrencyRepository;
+
 
 use net\authorize\api\contract\v1 as AnetAPI;
 use net\authorize\api\controller as AnetController;
@@ -29,7 +29,6 @@ class PublicController extends BasePublicController
     private $paymentMethod;
     private $order;
     private $transaction;
-    private $currency;
     private $authorizeApiController;
 
     protected $urlSandbox;
@@ -40,7 +39,6 @@ class PublicController extends BasePublicController
         PaymentMethodRepository $paymentMethod,
         OrderRepository $order,
         TransactionRepository $transaction,
-        CurrencyRepository $currency,
         IcommerceAuthorizeApiController $authorizeApiController
     )
     {
@@ -48,7 +46,6 @@ class PublicController extends BasePublicController
         $this->paymentMethod = $paymentMethod;
         $this->order = $order;
         $this->transaction = $transaction;
-        $this->currency = $currency;
         $this->authorizeApiController = $authorizeApiController;
 
         $this->urlSandbox = "https://jstest.authorize.net/v3/AcceptUI.js";
@@ -66,23 +63,18 @@ class PublicController extends BasePublicController
         try {
 
             // Decr
-            $infor = $this->icommerceauthorize->decriptUrl($eURL);
+            $infor = authorize_decriptUrl($eURL);;
             $orderID = $infor[0];
             $transactionID = $infor[1];
-            $currencyID = $infor[2];
 
             \Log::info('Module Icommerceauthorize: Index-ID:'.$orderID);
             
             // Validate get data
             $order = $this->order->find($orderID);
             $transaction = $this->transaction->find($transactionID);
-            $currency = $this->currency->find($currencyID);
 
-            $paymentName = config('asgard.icommerceauthorize.config.paymentName');
-
-            // Configuration
-            $attribute = array('name' => $paymentName);
-            $paymentMethod = $this->paymentMethod->findByAttributes($attribute);
+            // Get Payment Method Configuration
+            $paymentMethod = authorize_getPaymentMethodConfiguration();
 
 
             if($paymentMethod->options->mode=="sandbox")
@@ -90,8 +82,8 @@ class PublicController extends BasePublicController
             else
                 $acceptJS = $this->urlProduction;
 
-            $apiLogin = $paymentMethod->options->apilogin;
-            $clientKey = $paymentMethod->options->clientkey;
+            $apiLogin = $paymentMethod->options->apiLogin;
+            $clientKey = $paymentMethod->options->clientKey;
 
             $tpl = 'icommerceauthorize::frontend.index';
 
@@ -110,8 +102,6 @@ class PublicController extends BasePublicController
               'code' => $e->getCode()
             ];
 
-            //return response()->json($response, $status ?? 200);
-
             return redirect()->route("homepage");
 
         }
@@ -128,18 +118,15 @@ class PublicController extends BasePublicController
         $order = $this->order->find($orderID);
         $transaction = $this->transaction->find($transactionID);
         
-        $paymentName = config('asgard.icommerceauthorize.config.paymentName');
-
-        // Configuration
-        $attribute = array('name' => $paymentName);
-        $paymentMethod = $this->paymentMethod->findByAttributes($attribute);
+        // Get Payment Method Configuration
+        $paymentMethod = authorize_getPaymentMethodConfiguration();
 
          try{
  
              $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
  
-             $merchantAuthentication->setName($paymentMethod->options->apilogin);
-             $merchantAuthentication->setTransactionKey($paymentMethod->options->transactionkey);
+             $merchantAuthentication->setName($paymentMethod->options->apiLogin);
+             $merchantAuthentication->setTransactionKey($paymentMethod->options->transactionKey);
  
              // Set the transaction's refId
              $refId = $order->id."-".$transaction->id;
@@ -208,6 +195,7 @@ class PublicController extends BasePublicController
              else
                  $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
              
+            //dd($response);
              
             return $this->authorizeApiController->response(new Request([
                     'response' => $response,
@@ -215,6 +203,7 @@ class PublicController extends BasePublicController
                     'transactionID' => $transaction->id,
                     'paymentMethodID' => $paymentMethod->id
             ]));
+            
             
  
  

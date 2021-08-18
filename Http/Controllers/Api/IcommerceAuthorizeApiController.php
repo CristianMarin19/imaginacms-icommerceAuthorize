@@ -12,42 +12,38 @@ use Modules\Icommerce\Http\Controllers\Api\TransactionApiController;
 use Modules\Ihelpers\Http\Controllers\Api\BaseApiController;
 
 // Repositories
-use Modules\Icommerceauthorize\Repositories\IcommerceAuthorizeRepository;
-
-use Modules\Icommerce\Repositories\PaymentMethodRepository;
 use Modules\Icommerce\Repositories\TransactionRepository;
 use Modules\Icommerce\Repositories\OrderRepository;
-use Modules\Icommerce\Repositories\CurrencyRepository;
+
+// Request
+use Modules\Icommerceauthorize\Http\Requests\InitRequest;
+
+// Repositories
+use Modules\Icommerceauthorize\Repositories\IcommerceAuthorizeRepository;
 
 
 class IcommerceAuthorizeApiController extends BaseApiController
 {
 
     private $icommerceauthorize;
-    private $paymentMethod;
     private $order;
     private $orderController;
     private $transaction;
     private $transactionController;
-    private $currency;
 
     public function __construct(
-
         IcommerceAuthorizeRepository $icommerceauthorize,
-        PaymentMethodRepository $paymentMethod,
         OrderRepository $order,
         OrderApiController $orderController,
         TransactionRepository $transaction,
-        TransactionApiController $transactionController,
-        CurrencyRepository $currency
+        TransactionApiController $transactionController
     ){
+
         $this->icommerceauthorize = $icommerceauthorize;
-        $this->paymentMethod = $paymentMethod;
         $this->order = $order;
         $this->orderController = $orderController;
         $this->transaction = $transaction;
         $this->transactionController = $transactionController;
-        $this->currency = $currency;
 
     }
     
@@ -62,23 +58,25 @@ class IcommerceAuthorizeApiController extends BaseApiController
         
         try {
 
-            $orderID = $request->orderID;
+            $data = $request->all();
+
+            $this->validateRequestApi(new InitRequest($data));
+
+            $orderId = $request->orderId;
+            //\Log::info('Module Icommerceauthorize: Init-ID:'.$orderID);
             
-            \Log::info('Module Icommerceauthorize: Init-ID:'.$orderID);
-
-            $paymentName = config('asgard.icommerceauthorize.config.paymentName');
-
-            // Configuration
-            $attribute = array('name' => $paymentName);
-            $paymentMethod = $this->paymentMethod->findByAttributes($attribute);
-
+            // Payment Method Configuration
+            $paymentMethod = authorize_getPaymentMethodConfiguration();
+            
             // Order
-            $order = $this->order->find($orderID);
+            $order = $this->order->find($orderId);
             $statusOrder = 1; // Processing
 
-            // get currency active
-            $currency = $this->currency->getActive();
+            // Validate minimum amount order
+            if(isset($paymentMethod->options->minimunAmount) && $order->total<$paymentMethod->options->minimunAmount)
+              throw new \Exception(trans("icommerceauthorize::icommerceauthorizes.messages.minimum")." :".$paymentMethod->options->minimunAmount, 204);
 
+          
             // Create Transaction
             $transaction = $this->validateResponseApi(
                 $this->transactionController->create(new Request(["attributes" => [
@@ -90,8 +88,8 @@ class IcommerceAuthorizeApiController extends BaseApiController
             );
             
             // Encri
-            $eUrl = $this->icommerceauthorize->encriptUrl($order->id,$transaction->id,$currency->id);
-           
+            $eUrl = authorize_encriptUrl($order->id,$transaction->id);
+
             $redirectRoute = route('icommerceauthorize',[$eUrl]);
 
             // Response
@@ -200,6 +198,7 @@ class IcommerceAuthorizeApiController extends BaseApiController
                     ]
                 ]))
             );
+           
 
             // Check quasar app
             $isQuasarAPP = env("QUASAR_APP", false);
@@ -207,19 +206,14 @@ class IcommerceAuthorizeApiController extends BaseApiController
             if(!$isQuasarAPP){
 
                 if (!empty($order))
-                  return redirect()->route('icommerce.order.showorder', [$order->id, $order->key]);
+                    return redirect($order->url);
                 else
-                  return redirect()->route('homepage');
-                
+                    return redirect()->route('homepage');
+
             }else{
                 return view('icommerce::frontend.orders.closeWindow');
             }
 
-             // Check order
-            //if (!empty($order))
-                //$redirectRoute = route('icommerce.order.showorder', [$order->id, $order->key]);
-            //else
-                //$redirectRoute = route('homepage');
 
              // Response
             $response = [ 'data' => [

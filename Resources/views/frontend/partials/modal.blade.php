@@ -16,7 +16,7 @@
             class="AcceptUI btn btn-success btn-lg text-white "
             data-billingAddressOptions='{"show":true, "required":false}' 
             data-apiLoginID="{{$apiLogin}}"
-        data-clientKey="{{$clientKey}}"
+            data-clientKey="{{$clientKey}}"
             data-acceptUIFormBtnTxt="Submit" 
             data-acceptUIFormHeaderTxt="{{trans('icommerceauthorize::frontend.title.modal')}}" 
             data-responseHandler="responseHandler">{{trans('icommerceauthorize::frontend.button.pay')}}

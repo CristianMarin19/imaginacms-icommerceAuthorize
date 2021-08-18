@@ -2,6 +2,7 @@
 
 namespace Modules\Icommerceauthorize\Providers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Modules\Core\Traits\CanPublishConfiguration;
 use Modules\Core\Events\BuildingSidebar;
@@ -29,7 +30,7 @@ class IcommerceauthorizeServiceProvider extends ServiceProvider
         $this->app['events']->listen(BuildingSidebar::class, RegisterIcommerceauthorizeSidebar::class);
 
         $this->app['events']->listen(LoadingBackendTranslations::class, function (LoadingBackendTranslations $event) {
-            $event->load('icommerceauthorizes', array_dot(trans('icommerceauthorize::icommerceauthorizes')));
+            $event->load('icommerceauthorizes', Arr::dot(trans('icommerceauthorize::icommerceauthorizes')));
             // append translations
 
         });
@@ -39,6 +40,7 @@ class IcommerceauthorizeServiceProvider extends ServiceProvider
     {
         $this->publishConfig('icommerceauthorize', 'permissions');
         $this->publishConfig('icommerceauthorize', 'config');
+        $this->publishConfig('icommerceauthorize', 'crud-fields');
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
