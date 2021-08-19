@@ -29,7 +29,7 @@ class PublicController extends BasePublicController
     private $paymentMethod;
     private $order;
     private $transaction;
-    private $authorizeApiController;
+    private $icommerceAuthorizeApiController;
 
     protected $urlSandbox;
     protected $urlProduction;
@@ -39,14 +39,14 @@ class PublicController extends BasePublicController
         PaymentMethodRepository $paymentMethod,
         OrderRepository $order,
         TransactionRepository $transaction,
-        IcommerceAuthorizeApiController $authorizeApiController
+        IcommerceAuthorizeApiController $icommerceAuthorizeApiController
     )
     {
         $this->icommerceauthorize = $icommerceauthorize;
         $this->paymentMethod = $paymentMethod;
         $this->order = $order;
         $this->transaction = $transaction;
-        $this->authorizeApiController = $authorizeApiController;
+        $this->icommerceAuthorizeApiController = $icommerceAuthorizeApiController;
 
         $this->urlSandbox = config('asgard.icommerceauthorize.config.apiUrl.sandbox');
         $this->urlProduction = config('asgard.icommerceauthorize.config.apiUrl.production');
@@ -109,8 +109,8 @@ class PublicController extends BasePublicController
     }
 
      /**
-     * Send Information
-     * @param Requests request
+     * Payment Information
+     * @param orderId
      * @return redirect
      */
     public function payment($orderId,$transactionId,$oval,$odes){
@@ -196,7 +196,7 @@ class PublicController extends BasePublicController
                  $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
              
             
-            return $this->authorizeApiController->response(new Request([
+            return $this->icommerceAuthorizeApiController->response(new Request([
                     'response' => $response,
                     'orderID' => $order->id,
                     'transactionID' => $transaction->id,
