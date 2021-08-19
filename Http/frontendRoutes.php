@@ -10,9 +10,9 @@ use Illuminate\Routing\Router;
             'uses' => 'PublicController@index',
         ]);
 
-        $router->get('/process-payment/{orderID}/{transactionID}/{oval}/{odes}', [
-            'as' => 'icommerceauthorize.processPayment',
-            'uses' => 'PublicController@processPayment',
+        $router->get('/pay/{orderId}/{transactionId}/{oval}/{odes}', [
+            'as' => 'icommerceauthorize.payment',
+            'uses' => 'PublicController@payment',
         ]);
        
 

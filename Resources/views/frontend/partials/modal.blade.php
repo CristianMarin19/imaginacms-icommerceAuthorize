@@ -68,7 +68,7 @@
         
         function paymentFormUpdate(opaqueData) {
            
-            var url = "{{url('/icommerceauthorize/process-payment')}}";
+            var url = "{{url('/icommerceauthorize/pay')}}";
             window.location.href = url+"/"+{{$order->id}}+"/"+{{$transaction->id}}+"/"+opaqueData.dataValue+"/"+opaqueData.dataDescriptor;
 
         }

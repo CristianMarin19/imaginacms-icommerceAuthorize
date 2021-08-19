@@ -113,10 +113,10 @@ class PublicController extends BasePublicController
      * @param Requests request
      * @return redirect
      */
-    public function processPayment($orderID,$transactionID,$oval,$odes){
+    public function payment($orderId,$transactionId,$oval,$odes){
         
-        $order = $this->order->find($orderID);
-        $transaction = $this->transaction->find($transactionID);
+        $order = $this->order->find($orderId);
+        $transaction = $this->transaction->find($transactionId);
         
         // Get Payment Method Configuration
         $paymentMethod = authorize_getPaymentMethodConfiguration();
@@ -131,7 +131,7 @@ class PublicController extends BasePublicController
              // Set the transaction's refId
              $refId = $order->id."-".$transaction->id;
             
-             $restDescription = "Order:{$orderID} - {$order->email}";
+             $restDescription = "Order:{$orderId} - {$order->email}";
  
              // Create the payment object for a payment nonce
              $opaqueData = new AnetAPI\OpaqueDataType();
