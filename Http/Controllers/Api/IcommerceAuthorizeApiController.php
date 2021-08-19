@@ -200,25 +200,12 @@ class IcommerceAuthorizeApiController extends BaseApiController
             );
            
 
-            // Check quasar app
-            $isQuasarAPP = env("QUASAR_APP", false);
-
-            if(!$isQuasarAPP){
-
-                if (!empty($order))
-                    return redirect($order->url);
-                else
-                    return redirect()->route('homepage');
-
-            }else{
-                return view('icommerce::frontend.orders.closeWindow');
-            }
-
-
-             // Response
+            // Response
             $response = [ 'data' => [
-                "redirectRoute" => $redirectRoute
+                "status" => 'success'
             ]];
+
+    
           
         } catch (\Exception $e) {
              

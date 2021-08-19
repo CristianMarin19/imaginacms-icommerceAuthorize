@@ -114,7 +114,8 @@ class PublicController extends BasePublicController
      * @return redirect
      */
     public function payment($orderId,$transactionId,$oval,$odes){
-        
+
+
         $order = $this->order->find($orderId);
         $transaction = $this->transaction->find($transactionId);
         
@@ -196,16 +197,17 @@ class PublicController extends BasePublicController
                  $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
              
             
-            return $this->icommerceAuthorizeApiController->response(new Request([
+            $responseApi = $this->icommerceAuthorizeApiController->response(new Request([
                     'response' => $response,
                     'orderID' => $order->id,
                     'transactionID' => $transaction->id,
                     'paymentMethodID' => $paymentMethod->id
             ]));
+
+            // Return
+            return redirect($order->url);
             
-            
- 
- 
+
          }catch(Exception $e){
 
             \Log::error('Module Icommerceauthorize-Send: Message: '.$e->getMessage());
