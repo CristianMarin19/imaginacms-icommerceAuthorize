@@ -18,6 +18,12 @@ class IcommerceauthorizeDatabaseSeeder extends Seeder
         
         Model::unguard();
 
+        if(!is_module_enabled('Icommerceauthorize')){
+            $this->command->alert("This module: Icommerceauthorize is DISABLED!! , please enable the module and then run the seed");
+            exit();
+        }
+
+        //Validation if the module has been installed before
         $name = config('asgard.icommerceauthorize.config.paymentName');
         $result = PaymentMethod::where('name',$name)->first();
 
