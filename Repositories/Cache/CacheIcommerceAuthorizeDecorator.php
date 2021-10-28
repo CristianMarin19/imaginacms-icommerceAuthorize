@@ -15,6 +15,13 @@ class CacheIcommerceAuthorizeDecorator extends BaseCacheDecorator implements Ico
     }
 
     
+    public function calculate($parameters,$conf)
+    {
+        return $this->remember(function () use ($parameters,$conf) {
+            return $this->repository->calculate($parameters, $conf);
+        });
+    }
+    
      /**
      * List or resources
      *

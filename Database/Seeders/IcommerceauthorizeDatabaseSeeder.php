@@ -29,6 +29,7 @@ class IcommerceauthorizeDatabaseSeeder extends Seeder
             $options['clientKey'] = "";
             $options['mode'] = "sandbox";
             $options['minimunAmount'] = 0;
+            $options['maximumAmount'] = null;
             
             $titleTrans = 'Authorize';
             $descriptionTrans = 'icommerceauthorize::icommerceauthorizes.description';

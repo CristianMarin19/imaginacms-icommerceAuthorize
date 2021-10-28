@@ -8,6 +8,8 @@ interface IcommerceAuthorizeRepository extends BaseRepository
 {
    
 
+    public function calculate($parameters,$conf);
+    
     public function decriptUrl($eUrl);
 
 }
