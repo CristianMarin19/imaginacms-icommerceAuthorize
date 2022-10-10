@@ -42,7 +42,7 @@ class IcommerceauthorizeServiceProvider extends ServiceProvider
         $this->publishConfig('icommerceauthorize', 'config');
         $this->publishConfig('icommerceauthorize', 'crud-fields');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        //$this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
     /**
