@@ -18,6 +18,7 @@ class IcommerceauthorizeDatabaseSeeder extends Seeder
         
         Model::unguard();
 
+        $this->call(IcommerceauthorizeModuleTableSeeder::class);
         if(!is_module_enabled('Icommerceauthorize')){
             $this->command->alert("This module: Icommerceauthorize is DISABLED!! , please enable the module and then run the seed");
             exit();
