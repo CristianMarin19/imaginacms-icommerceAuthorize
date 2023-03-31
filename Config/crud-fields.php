@@ -82,6 +82,23 @@ return [
                 'label' => 'icommerceauthorize::icommerceauthorizes.table.clientKey'
             ]
         ],
+        'showInCurrencies' => [
+          'value' => ['USD'],
+          'name' => 'showInCurrencies',
+          'isFakeField' => true,
+          'type' => 'select',
+          'props' => [
+            'label' => 'icommerce::paymentmethods.messages.showInCurrencies',
+            'useInput' => false,
+            'useChips' => false,
+            'multiple' => true,
+            'hideDropdownIcon' => true,
+            'newValueMode' => 'add-unique',
+            'options' =>  [
+              ['label' => 'USD','value' => 'USD']
+            ]
+          ]
+        ],
         'mode' => [
             'value' => 'sandbox',
             'name' => 'mode',
