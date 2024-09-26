@@ -28,8 +28,8 @@ class CacheIcommerceAuthorizeDecorator extends BaseCacheDecorator implements Ico
      */
     public function decriptUrl($eUrl)
     {
-        return $this->remember(function () use ($eUrl) {
-            return $this->repository->decriptUrl($eUrl);
-        });
+        
+        return $this->repository->decriptUrl($eUrl);
+        
     }
 }
